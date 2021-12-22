@@ -128,6 +128,13 @@ TARGET_INCLUDE_DIRECTORIES(lmms
 	PUBLIC ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+
+ADD_CUSTOM_COMMAND(
+	TARGET lmms POST_BUILD
+	COMMAND ${CMAKE_COMMAND} -E copy
+			$<SHELL_PATH:${CMAKE_BINARY_DIR}/CMakeCache.txt>
+			$<SHELL_PATH:$<TARGET_FILE_DIR:lmms>/CMakeCache.txt>)
+
 # CMake doesn't define target_EXPORTS for OBJECT libraries.
 # See the documentation of DEFINE_SYMBOL for details.
 # Also add LMMS_STATIC_DEFINE for targets linking against it.
